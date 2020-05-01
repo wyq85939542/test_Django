@@ -1,9 +1,18 @@
 from selenium import webdriver
-from time import sleep
+import unittest
 
-browser = webdriver.Firefox()
-browser.get('http://localhost:8000')
 
-assert 'Django' in browser.title
-sleep(1)
-browser.close()
+class NewVisitorTest(unittest.TestCase):
+
+    def setUp(self) -> None:
+        self.browser = webdriver.Firefox()
+
+    def test_get_one_web_01(self):
+        self.browser.get('http://localhost:8000')
+
+        self.assertIn('To-Do', self.browser.title)
+        self.fail('Finish the Test!')
+
+    def tearDown(self):
+
+        self.browser.close()
